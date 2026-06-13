@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Sleepy OS</title>
+    </head>
+
+  <body>
+    
+    <div class="desktop">
+
+        <div class="icon-grid">
+            <div class="shortcut" onclick="alert('Snore App coming soon')">
+                <div class="icon">💤</div>
+                <span class="icon-label">Nap Timer</span>
+            </div>
+        
+
+            <div class="shortcut" onclick="togglePdfWindow()">
+                <div class="icon">📄</div>
+                <span class="icon-label">SpongeBob?.pdf</span>
+            </div>
+        </div>
+
+        <div id="pdf-window" class="window hidden">
+            <div id="pdf-header" class="window-header" style="cursor: move;">
+                    <span class="window-title">📄 SpongeBob?.pdf</span>
+                    <button class="close-btn" onclick="togglePdfWindow()">✖</button>
+            </div>
+
+            <div class="window-body">
+                <img src="flat,750x,075,f-pad,750x1000,f8f8f8.u1.png" alt="PDF Page View" class="pdf-content-img">
+            </div>
+        </div>
+
+        <div class="taskbar">
+            <button class="start">🌙</button>
+
+            <div class="system-tray" style="display: flex; align-items: center ; gap: 12px;">
+                <div id="battery-status" class="battery-status">🔋 --%</div>
+                <div class="taskbar-time" id="clock">12:00 PM</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="background-color: rgba(0, 0, 0, 0.25); color: #fff; backdrop-filter: blur(10px);">
+
+        <p style="margin-left: 16px;">Sleepy OS</p>
+        
+
+    </div>
+
+    <script>
+        function updateClock(){
+            const clockEl = document.getElementById('clock');
+            if(!clockEl) return;
+
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+
+            clockEl.innerText = `${hours}:${minutes} ${ampm}`;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        function initBatteryTracker() {
+    const batteryEl = document.getElementById('battery-status');
+    if (!batteryEl) return;
+
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function(battery) {
+            function updateBatteryUI() {
+                const level = Math.round(battery.level * 100);
+                const icon = battery.charging ? '⚡' : '🔋';
+                batteryEl.innerText = `${icon} ${level}%`;
+            }
+            updateBatteryUI();
+            battery.addEventListener('levelchange', updateBatteryUI);
+            battery.addEventListener('chargingchange', updateBatteryUI);
+        });
+    } else {
+        batteryEl.innerText = '🔋 N/A';
+    }
+}
+initBatteryTracker();
+
+function togglePdfWindow(){
+    const windowEl = document.getElementById('pdf-window');
+    if (windowEl) {
+        windowEl.classList.toggle('hidden');
+    }
+
+    function makeWindowDraggable(windowEl, headerEl) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+    headerEl.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        
+        windowEl.style.top = (windowEl.offsetTop - pos2) + "px";
+        windowEl.style.left = (windowEl.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+const myWindow = document.getElementById("pdf-window");
+const myHeader = document.getElementById("pdf-header");
+makeWindowDraggable(myWindow, myHeader);
+}
+    </script>
+  </body>
+
+</html>

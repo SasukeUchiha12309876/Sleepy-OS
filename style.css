@@ -1,0 +1,170 @@
+html, body{
+    margin: 0;
+    padding:0%;
+    width: 100vw;
+    height: 100vh;
+    overflow:hidden;
+    background-color: #000011;
+}
+
+.icon-grid{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+
+.shortcut {
+    width: 70px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    cursor:pointer;
+    color: white;
+    text-align: center;
+}
+
+.icon{
+    font-size: 36px;
+    transition: transform 0.2s ease;
+}
+
+.shortcut:hover .icon{
+    transform:scale(1.1);
+}
+
+.icon-label{
+    font-size: 12px;
+    margin-top: 4px;
+    font-family: sans-serif;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8)
+}
+
+.taskbar{
+    position:fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width:90%;
+    height:45px;
+    background:rgba(10, 10, 20, 0.6);
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.start{
+    background:rgba(255,255,255,0.15);
+    color: white;
+    border:none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.start:hover{
+    background: rgba(255, 255,255, 0.3);
+}
+
+.taskbar-time{
+    color: rgba(255, 255, 255, 0.8);
+    font-family:sans-serif;
+    font-size: 13px;
+}
+
+.desktop{
+    background-image: url("Gemini_Generated_Image_z7aeoqz7aeoqz7ae.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    width: 100vw;
+    height: 100vh;
+    display: block;
+}
+
+.battery-status{
+    color: rgba(255, 255, 255, 0.85);
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.window{
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    width: 500px;
+    height: 400px;
+    background: #1e1e24;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.window-header {
+    background: #111116;
+    color: white;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+.close-btn {
+    background: #ff5f56;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.window-body {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto; 
+    background: #121214;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.pdf-content-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.hidden {
+    display: none !important;
+}
